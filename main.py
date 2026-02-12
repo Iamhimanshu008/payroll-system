@@ -210,7 +210,7 @@ class EmployeeSystem:
             "times new roman", 16), bg="#1E90FF", fg="black", bd=2, relief="raised", ).place(x=90, y=230, width=100)
         Button(frame2, text="Save", command=self.add, font=("times new roman", 16),
                bg="#1E90FF", fg="black", bd=2, relief="raised", ).place(x=285, y=230, width=100)
-        Button(frame2, text="Clear", font=("times new roman", 16), bg="#1E90FF",
+        Button(frame2, text="Clear", command=self.clear, font=("times new roman", 16), bg="#1E90FF",
                fg="black", bd=2, relief="raised", ).place(x=480, y=230, width=100)
 
         # frame3
@@ -400,6 +400,56 @@ class EmployeeSystem:
             except Exception as ex:
                 messagebox.showerror("Error!", f'Error due to this: {str(ex)}')
 
+    def clear(self):
+        self.var_emp_code.set("")
+        self.var_designation.set("")
+        self.var_name.set("")
+        self.var_age.set("")
+        self.var_gender.set("")
+        self.var_email.set("")
+        self.var_dob.set("")
+        self.var_doj.set("")
+        self.var_proof.set("")
+        self.var_contact.set("")
+        self.var_status.set("")
+        self.var_experience.set("")
+        self.var_blood_group.set("")
+        self.var_account_no.set("")
+        self.var_ifsc_code.set("")
+        self.var_month.set("")
+        self.var_year.set("")
+        self.var_salary.set("")
+        self.var_days.set("")
+        self.var_absent.set("")
+        self.var_medical.set("")
+        self.var_pf.set("")
+        self.var_convince.set("")
+        self.var_net_salary.set("")
+        self.txt_address.delete('1.0', END)
+        self.var_txt.set("")
+        self.var_operator = ''
+
+        sample = f'''\tCompany Name, XYZ\n\tAddress: Xyz, Floor4
+--------------------------------------------------
+ Employee ID\t\t:
+ Salary Of\t\t:   MON-YYYY
+ Generated On\t\t:   DD-MM-YYYY
+--------------------------------------------------
+ Total Days\t\t:   DD
+ Total Present\t\t:   DD
+ Total Absent\t\t:   DD
+ convince\t\t:   Rs.----
+ Medical\t\t:   Rs.----
+ PF\t\t:   Rs.----
+ Gross Payment\t\t:   Rs.-------
+ Net Salary\t\t:   Rs.--------
+--------------------------------------------------
+ This is computer generated slip,
+ not required any signature
+'''
+        self.txt_salary_receipt.delete('1.0', END)
+        self.txt_salary_receipt.insert(END, sample)
+
     def calculate(self):
         if self.var_month.get() == '' or self.var_year.get() == '' or self.var_salary.get() == '':
             messagebox.showerror('Error', 'All fields are required')
@@ -435,6 +485,7 @@ class EmployeeSystem:
             self.txt_salary_receipt.insert(END, new_sample)
 
 
-root = Tk()
-obj = EmployeeSystem(root)
-root.mainloop()
+if __name__ == '__main__':
+    root = Tk()
+    obj = EmployeeSystem(root)
+    root.mainloop()
